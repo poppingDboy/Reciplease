@@ -9,6 +9,11 @@ import SwiftUI
 
 @main
 struct RecipleaseApp: App {
+    init() {
+        // Enregistrement du transformateur
+        StringArrayToDataTransformer.register()
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
