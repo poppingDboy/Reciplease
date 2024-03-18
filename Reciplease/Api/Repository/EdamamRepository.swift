@@ -15,82 +15,38 @@ class EdamamRepository {
         self.session = session
     }
     
-    func getWeatherParis(completion: @escaping (Bool, EdamamModel?) -> Void) {
+    func getRecipesRepo(for ingredients: [String], completion: @escaping (Bool, EdamamModel?) -> Void) {
         let url = "https://api.edamam.com/api/recipes/v2"
+        let joinedIngredients = ingredients.joined(separator: ",")
         let parameters: [String: Any] = [
-            "app_id": "179386f2",
-            "app_key": "8ceef13f422d691485ae7f600502f166",
+            "app_id": "\(EdamamKey.appId)",
+            "app_key": "\(EdamamKey.appKey)",
             "type": "any",
-            "q": "chicken"
+            "q": joinedIngredients
         ]
         
-        let urlString = "\(OpenWeatherApi.baseURL)?q=\(city)&APPID=\(accessKey)"
-        let url = URL(string: urlString)!
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        
-//        AF.request(url, parameters: parameters).responseDecodable(of: EdamamModel.self) { response in
-//            guard let edamamResult = response.value else { return }
-//            DispatchQueue.main.async {
-//                self.listRecipes = edamamResult.hits.map { hit in
-//                    let limitedIngredients = hit.recipe.ingredients.map { $0.text }.prefix(4)
-//                    return RecipeObject(title: hit.recipe.label,
-//                                        ingredients: Array(limitedIngredients),
-//                                        timeCook: hit.recipe.totalTime,
-//                                        image: hit.recipe.image,
-//                                        urlDiretion: hit.recipe.url)
-//                }
-//            }
-//        }
-        
-        let task = session.dataTask(with: request) { data, response, error in
+        AF.request(url, parameters: parameters).responseData { response in
             DispatchQueue.main.async {
-                guard let data = data, error == nil else {
+                guard let data = response.data, response.error == nil else {
                     completion(false, nil)
                     return
                 }
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    completion(false,nil)
+                guard let httpResponse = response.response, httpResponse.statusCode == 200 else {
+                    completion(false, nil)
                     return
                 }
+                
+                
+                // pour tester avec le debug
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 do {
-                    let weatherResponse = try JSONDecoder().decode(OpenWeatherModel.self, from: data)
-                    completion(true, weatherResponse)
+                    let edamamResult = try decoder.decode(EdamamModel.self, from: data)
+                    completion(true, edamamResult)
                 } catch {
+                    print("Erreur de décodage: \(error)")
                     completion(false, nil)
                 }
-            }
-        }
-        task.resume()
-        
-    }
-    
-}
-
-
-
-
-
-func fetchRecipes() {
-    let url = "https://api.edamam.com/api/recipes/v2"
-    let parameters: [String: Any] = [
-        "app_id": "179386f2",
-        "app_key": "8ceef13f422d691485ae7f600502f166",
-        "type": "any",
-        "q": "chicken"
-    ]
-    
-    AF.request(url, parameters: parameters).responseDecodable(of: EdamamModel.self) { response in
-        guard let edamamResult = response.value else { return }
-        DispatchQueue.main.async {
-            self.listRecipes = edamamResult.hits.map { hit in
-                let limitedIngredients = hit.recipe.ingredients.map { $0.text }.prefix(4)
-                return RecipeObject(title: hit.recipe.label,
-                                    ingredients: Array(limitedIngredients),
-                                    timeCook: hit.recipe.totalTime,
-                                    image: hit.recipe.image,
-                                    urlDiretion: hit.recipe.url)
             }
         }
     }

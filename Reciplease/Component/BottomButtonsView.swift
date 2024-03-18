@@ -11,7 +11,7 @@ struct BottomButtonsView: View {
     var body: some View {
         HStack {
             Button(action: {
-                print("Search button tapped")
+                
             }) {
                 Text("Search")
                     .foregroundColor(.white)
@@ -23,7 +23,7 @@ struct BottomButtonsView: View {
             .padding(.horizontal, 36)
             
             Button(action: {
-                print("Favorite button tapped")
+                
             }) {
                 Text("Favorite")
                     .foregroundColor(.white)

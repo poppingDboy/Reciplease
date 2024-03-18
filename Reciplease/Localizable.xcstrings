@@ -1,5 +1,42 @@
 {
   "sourceLanguage" : "en",
-  "strings" : {},
+  "strings" : {
+    "- %@" : {
+
+    },
+    "%lld" : {
+
+    },
+    "Attention" : {
+
+    },
+    "Aucune recette trouvée" : {
+
+    },
+    "Favoris" : {
+
+    },
+    "Favorite" : {
+
+    },
+    "Hello, World!" : {
+
+    },
+    "Ingredients" : {
+
+    },
+    "OK" : {
+
+    },
+    "Recettes" : {
+
+    },
+    "Search" : {
+
+    },
+    "Veuillez rentrer uniquement des lettres de l'alphabet, sans chiffres, espaces, ou caractères spéciaux." : {
+
+    }
+  },
   "version" : "1.0"
 }

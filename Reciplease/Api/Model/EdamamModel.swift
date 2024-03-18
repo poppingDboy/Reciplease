@@ -62,32 +62,19 @@ struct Recipe: Codable {
     let shareAs: String
     let yield: Int
     let dietLabels, healthLabels: [String]
-    let cautions: [Caution]
+    let cautions: [String]
     let ingredientLines: [String]
     let ingredients: [Ingredient]
     let calories, totalCO2Emissions: Double
-    let co2EmissionsClass: Co2EmissionsClass
+    let co2EmissionsClass: String
     let totalWeight: Double
     let totalTime: Int
     let cuisineType: [String]
-    let mealType: [MealType]
-    let dishType: [String]
+    let mealType: [String]
+    let dishType: [String]?
     let totalNutrients, totalDaily: [String: Total]
     let digest: [Digest]
     let tags: [String]?
-}
-
-enum Caution: String, Codable {
-    case fodmap = "FODMAP"
-    case gluten = "Gluten"
-    case sulfites = "Sulfites"
-    case wheat = "Wheat"
-}
-
-enum Co2EmissionsClass: String, Codable {
-    case e = "E"
-    case f = "F"
-    case g = "G"
 }
 
 // MARK: - Digest
@@ -197,9 +184,9 @@ struct Ingredient: Codable {
     }
 }
 
-enum MealType: String, Codable {
-    case lunchDinner = "lunch/dinner"
-}
+//enum MealType: String, Codable {
+//    case lunchDinner = "lunch/dinner"
+//}
 
 // MARK: - Total
 struct Total: Codable {

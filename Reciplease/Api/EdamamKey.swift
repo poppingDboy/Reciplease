@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct EdamamKey {
+    static let appId = "7ac2b92b"
+    static let appKey = "344b94285885bf5d159878cef10c7721"
+}

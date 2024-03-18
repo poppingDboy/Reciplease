@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    var favoriteViewModel = FavoriteViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        MainView(valueTextField: "")
+            .environmentObject(MainViewModel())
+            .environmentObject(favoriteViewModel)
+        
     }
 }
 

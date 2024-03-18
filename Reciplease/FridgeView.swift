@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct FridgeView: View {
+    var mainViewModel: MainViewModel
+    
+    init(mainViewModel: MainViewModel) {
+        self.mainViewModel = mainViewModel
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text(Localized.Main.fridgeTitle)
+                .font(.headline)
+                .frame(maxWidth: .infinity)
+                .background(Color.white)
+                .padding(.vertical, 6)
+                .padding(.horizontal, 0)
+            
+        }
     }
 }
 
 #Preview {
-    FridgeView()
+    FridgeView(mainViewModel: MainViewModel())
 }

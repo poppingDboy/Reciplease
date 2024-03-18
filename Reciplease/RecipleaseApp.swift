@@ -11,7 +11,7 @@ import SwiftUI
 struct RecipleaseApp: App {
     init() {
         // Enregistrement du transformateur
-        StringArrayToDataTransformer.register()
+//        StringArrayToDataTransformer.register()
     }
     
     var body: some Scene {

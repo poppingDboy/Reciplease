@@ -10,14 +10,16 @@ import Foundation
 class RecipeObject: Identifiable, Hashable {
     var title: String
     var ingredients: [String]
-    var numberLikes: Int
     var timeCook: Int
+    var image: String
+    var urlDirection: String
     
-    init(title: String, ingredients: [String], numberLikes: Int, timeCook: Int) {
+    init(title: String, ingredients: [String], timeCook: Int, image: String, urlDirection: String) {
         self.title = title
         self.ingredients = ingredients
-        self.numberLikes = numberLikes
         self.timeCook = timeCook
+        self.image = image
+        self.urlDirection = urlDirection
     }
     
     func hash(into hasher: inout Hasher) {
